@@ -4,13 +4,20 @@ import drinkshop.repository.file.FileProductRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.MethodOrderer;
 
 import drinkshop.service.ProductService;
 import drinkshop.service.validator.ProductValidator;
 import drinkshop.service.validator.ValidationException;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class ProductTest {
 
     Product product;
@@ -36,60 +43,82 @@ class ProductTest {
     }
 
     @Test
+    @Order(1)
+    @DisplayName("Product: getId returns constructor ID")
     void getId() {
         assertEquals(100, product.getId(), "The product ID should be 100.");
     }
 
     @Test
+    @Order(2)
+    @DisplayName("Product: getNume returns constructor name")
     void getNume() {
         assertEquals("Limonada",product.getNume());
     }
 
     @Test
+    @Order(3)
+    @DisplayName("Product: getPret returns constructor price")
     void getPret() {
         assertEquals(10.0,product.getPret());
     }
 
     @Test
+    @Order(4)
+    @DisplayName("Product: getCategorie returns constructor category")
     void getCategorie() {
         assertEquals( CategorieBautura.JUICE,product.getCategorie());
     }
 
     @Test
+    @Order(5)
+    @DisplayName("Product: setCategorie updates category")
     void setCategorie() {
         product.setCategorie(CategorieBautura.SMOOTHIE);
         assertEquals( CategorieBautura.SMOOTHIE,product.getCategorie());
     }
 
     @Test
+    @Order(6)
+    @DisplayName("Product: getTip returns constructor type")
     void getTip() {
         assertEquals( TipBautura.WATER_BASED,product.getTip());
     }
 
     @Test
+    @Order(7)
+    @DisplayName("Product: setTip updates type")
     void setTip() {
         product.setTip(TipBautura.BASIC);
         assertEquals( TipBautura.BASIC,product.getTip());
     }
 
     @Test
+    @Order(8)
+    @DisplayName("Product: setNume updates name")
     void setNume() {
         product.setNume("newLimonada");
         assertEquals( "newLimonada",product.getNume());
     }
 
     @Test
+    @Order(9)
+    @DisplayName("Product: setPret updates price")
     void setPret() {
         product.setPret(10.05);
         assertEquals( 10.05,product.getPret());
     }
 
     @Test
+    @Order(10)
+    @DisplayName("Product: toString formats correctly")
     void testToString() {
         assertEquals( "Limonada (JUICE, WATER_BASED) - 10.0 lei",product.toString());
     }
 
     @Test
+    @Order(11)
+    @DisplayName("Service: addProduct saves a valid product")
     void addProduct_shouldSave() {
 
         Product p = new Product(10, "Produs1", 10, CategorieBautura.CLASSIC_COFFEE, TipBautura.BASIC);
@@ -102,6 +131,8 @@ class ProductTest {
     }
 
     @Test
+    @Order(12)
+    @DisplayName("Service: addProduct rejects empty name")
     void addProduct_InvalidName_shouldThrowException() {
 
         Product p = new Product(10, "", 10, CategorieBautura.CLASSIC_COFFEE, TipBautura.BASIC);
@@ -115,7 +146,6 @@ class ProductTest {
 //
 //        Product p = new Product("id", "Produs1", 10, CategorieBautura.CLASSIC_COFFEE, TipBautura.BASIC);
 //
-//        service.addProduct(p);
 //        assertThrows(ValidationException.class, () -> service.addProduct(p));
 //        assertNull(service.findById(10));
 //    }
@@ -125,12 +155,13 @@ class ProductTest {
 //
 //        Product p = new Product(10, "", 10, TipBautura.BASIC, TipBautura.BASIC);
 //
-//        service.addProduct(p);
 //        assertThrows(ValidationException.class, () -> service.addProduct(p));
 //        assertNull(service.findById(10));
 //    }
 
     @Test
+    @Order(13)
+    @DisplayName("Service: addProduct accepts ID at upper boundary")
     void addProduct_atIDBoundary_shouldSave() {
 
         Product p = new Product(999, "Nume1", 15, CategorieBautura.CLASSIC_COFFEE, TipBautura.BASIC);
@@ -144,10 +175,13 @@ class ProductTest {
 
 
 
-    @Test
-    void addProduct_atNumeBoundary_shouldThrowException() {
+    @Order(14)
+    @DisplayName("Service: addProduct rejects name at lower boundary")
+    @ParameterizedTest
+    @CsvSource({"10, DD, 15, CLASSIC_COFFEE, BASIC"})
+    void addProduct_atNumeBoundary_shouldThrowException(int id, String nume, double pret, CategorieBautura classic, TipBautura tip) {
 
-        Product p = new Product(10, "DD", 15, CategorieBautura.CLASSIC_COFFEE, TipBautura.BASIC);
+        Product p = new Product(id, nume,  pret, CategorieBautura.CLASSIC_COFFEE, TipBautura.BASIC);
 
         assertThrows(ValidationException.class, () -> service.addProduct(p));
         assertNull(service.findById(10));
@@ -155,6 +189,8 @@ class ProductTest {
     }
 
     @Test
+    @Order(15)
+    @DisplayName("Service: addProduct accepts price at upper boundary")
     void addProduct_atPriceBoundary_shouldSave() {
 
         Product p = new Product(10, "Nume1", 20, CategorieBautura.CLASSIC_COFFEE, TipBautura.BASIC);
@@ -167,6 +203,8 @@ class ProductTest {
     }
 
     @Test
+    @Order(16)
+    @DisplayName("Service: addProduct rejects price above upper boundary")
     void addProduct_atPriceBoundary_shouldThrowException() {
 
         Product p = new Product(10, "Nume1", 21, CategorieBautura.CLASSIC_COFFEE, TipBautura.BASIC);
