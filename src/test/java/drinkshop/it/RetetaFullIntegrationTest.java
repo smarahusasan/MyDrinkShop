@@ -1,4 +1,4 @@
-package drinkshop.it; // it vine de la Integration Test
+package drinkshop.it;
 
 import drinkshop.domain.IngredientReteta;
 import drinkshop.domain.Reteta;
@@ -16,6 +16,7 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+//toate comp reale
 class RetetaFullIntegrationTest {
 
     private RetetaService service;

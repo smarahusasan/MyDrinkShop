@@ -21,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
+//doar repo-ul mock
 class RetetaServiceTestMockRepo {
     private RetetaService retetaService;
 
