@@ -181,7 +181,7 @@ class ProductTest {
     @CsvSource({"10, DD, 15, CLASSIC_COFFEE, BASIC"})
     void addProduct_atNumeBoundary_shouldThrowException(int id, String nume, double pret, CategorieBautura classic, TipBautura tip) {
 
-        Product p = new Product(id, nume,  pret, CategorieBautura.CLASSIC_COFFEE, TipBautura.BASIC);
+        Product p = new Product(10, "DD",  15, CategorieBautura.CLASSIC_COFFEE, TipBautura.BASIC);
 
         assertThrows(ValidationException.class, () -> service.addProduct(p));
         assertNull(service.findById(10));
