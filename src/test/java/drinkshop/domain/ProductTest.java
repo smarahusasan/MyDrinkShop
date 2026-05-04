@@ -177,9 +177,9 @@ class ProductTest {
 
     @Order(14)
     @DisplayName("Service: addProduct rejects name at lower boundary")
-    @ParameterizedTest
-    @CsvSource({"10, DD, 15, CLASSIC_COFFEE, BASIC"})
-    void addProduct_atNumeBoundary_shouldThrowException(int id, String nume, double pret, CategorieBautura classic, TipBautura tip) {
+    @Test
+   // @CsvSource({"10, DD, 15, CLASSIC_COFFEE, BASIC"})
+    void addProduct_atNumeBoundary_shouldThrowException() {
 
         Product p = new Product(10, "DD",  15, CategorieBautura.CLASSIC_COFFEE, TipBautura.BASIC);
 
