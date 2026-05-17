@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 //toate mock-uite
-public class RetetaServiceTestBothMocks {
+public class RetetaServiceBothMocksTest {
     @Mock
     private Validator<Reteta> retetaValidator;
     @Mock

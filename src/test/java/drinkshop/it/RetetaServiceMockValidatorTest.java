@@ -19,7 +19,7 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-class RetetaServiceTestMockValidator {
+class RetetaServiceMockValidatorTest {
     private RetetaService retetaService;
     private final String testFileName = "test_mock_validator.txt";
 

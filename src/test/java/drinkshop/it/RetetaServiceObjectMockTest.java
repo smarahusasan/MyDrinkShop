@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 //comp reale, obiect mock-uit
-class RetetaServiceTestObjectMock {
+class RetetaServiceObjectMockTest {
 
     private RetetaService retetaService;
     private final String testFileName = "test_mock_entity.txt";

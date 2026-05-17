@@ -22,7 +22,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 //doar repo-ul mock
-class RetetaServiceTestMockRepo {
+class RetetaServiceMockRepoTest {
     private RetetaService retetaService;
 
     @Mock
